@@ -1,0 +1,39 @@
+Stage 1:
+
+Students can add DONE
+Students can change their boxes
+Mind Map updates when new box is added
+Mind Map updates when text is changed (https://gojs.net/latest/api/symbols/TextEditingTool.html)
+  								(https://gojs.net/latest/samples/updateDemo.html)
+  								(https://gojs.net/latest/intro/transactions.html)
+Stage 2:
+
+If Creator, then their letters are bolded
+Fix check to see if you have internet connection
+Teachers can create rooms DONE
+Students can join rooms DONE
+Incorporate multiple mind map
+Stage 3:
+
+Implement Accounts DONE
+Features:
+
+See how long a student has been waiting to speak
+Removes hand raising
+Makes sure that students get called on as fast as possible
+Have a visual of the discussion
+Helps students respond to more points
+Helps students remember points
+Allow students to respond to more points
+Removes the roadblock of having to think about one response at a time
+Gauge participation based on responses.
+Save the discussion for future reference.
+Maybe allow user to save up to 3 discussion then make it paid for rest
+Bonus Features:
+
+Group similiar thoughts together
+Run an analysis on the discussion
+See how many times a student has been called on?
+
+BUGS
+- non-draggable nodes

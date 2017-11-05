@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>DiscMap</title>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.7.12/go.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+      <link rel="stylesheet" href="css/styles.css">
+      <script>
+         // Initialize Firebase
+         var config = {
+           apiKey: "AIzaSyBUqdelyjsQ4rZFWUdn4ZCzYpwXlJhkRQs",
+           authDomain: "discussion-f4214.firebaseapp.com",
+           databaseURL: "https://discussion-f4214.firebaseio.com",
+           projectId: "discussion-f4214",
+           storageBucket: "discussion-f4214.appspot.com",
+           messagingSenderId: "886727363835"
+         };
+         firebase.initializeApp(config);
+         
+      </script>
+    <script src="https://use.fontawesome.com/d0bc9af035.js"></script>
+   </head>
+   <body onload="getMindMapString();">
+       
+       <div class="navbar">
+           <p id="code">Code: </p>
+           <a href="./index.html"><h3><img src="./discmap.png"></h3></a>
+           <i class="fa fa-bars" onclick="document.getElementById('info').style.right = '0';"></i>
+       </div>
+       
+       <img class="person" src="person.png">
+     
+      <div id="popup" class="popup-container" onclick="removePopup()">
+        <div class="popup">
+          <h2>Enter Topic Name:</h2>
+          <input id="input" type="text" placeholder="Topic Name" autocomplete="off" name="hidden" type="text" spellcheck="false">
+          <input id="details" type="text" placeholder="More details..." autocomplete="off" name="hidden" type="text" spellcheck="false">
+          <a href="#" onclick="add()">Add</a>
+          <a class="ghost" href="#" onclick="removePopup()">Cancel</a>
+        </div>
+      </div>
+      
+      <div id="info" class="info">
+          <h2>Name: </h2>
+          <h2>Point: </h2>
+          <p>Details: </p>
+          <p>In Topic: </p>
+          <p>Children:</p>
+          <ul>
+          </ul>
+        
+        <i class="fa fa-close" onclick="closeInfo()"></i>
+        
+      </div>
+     
+      <div id="sample">
+         <div id="myDiagramDiv" style="border: 1px solid black; width:100vw; height:100vh;"></div>
+         <textarea id="mySavedModel" style="display: none;">
+    { "class": "go.TreeModel",
+              "nodeDataArray": [
+            {"key":0, "text":"Mind Map", "loc":"0 0", "font":"400 20px 'Avenir Next'"}
+             ]
+            }
+      </textarea>
+      </div>
+      <script>
+      
+      function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+      
+      document.getElementById("code").innerHTML = getCookie("name") + " (" + getCookie("code") + ")";
+      
+      function getNode(nodes, key) {
+        for (var i = 0; i < nodes.length; i++) {
+          if (nodes[i].key == key) {
+            return nodes[i];
+          }
+        }
+        return undefined;
+      }
+      
+      function getChildren(nodes, key) {
+        var children = "";
+        for (var i = 0; i < nodes.length; i++) {
+          if (nodes[i].parent == key) {
+            children += "<li>" + nodes[i].text + "</li>";
+          }
+        }
+        return children;
+      }
+      
+        Element.prototype.remove = function() {
+            this.parentElement.removeChild(this);
+        }
+      
+         var showPopup = function() {
+           var popup = document.getElementById("popup");
+           popup.style.display = "block";
+         }
+         
+         var removePopup = function() {
+           var popup = document.getElementById("popup");
+           popup.style.display = "none";
+           //document.getElementById("input").value = "";
+           //document.getElementById("details").value = "";
+         }
+         
+         function closeInfo() {
+             document.getElementById("info").style.right = "-33vw";
+         }
+         
+         document.getElementsByClassName("popup")[0].onclick = function(e) {
+             e.stopPropagation();
+         }
+            setTimeout(function() {
+                document.getElementsByTagName("canvas")[0].onclick = function() {
+                    closeInfo();
+                }
+            }, 2000);
+           
+        function loadCustom() {
+          document.getElementById("myDiagramDiv").children.item(1).remove();
+          // Have loading circle instead
+            window.myDiagram.addDiagramListener("ObjectSingleClicked", function(event) {
+                
+                setTimeout(function() {
+                document.getElementById("info").style.right = "0";
+                }, 1);
+              
+              // get data key
+              var data = document.getElementById("mySavedModel").value;
+              var key = event.subject.part.data.key;
+              
+              // get node from key
+              var nodes = go.Model.fromJson(document.getElementById("mySavedModel").value).nodeDataArray;
+              var node = getNode(nodes, key);
+              if (node == undefined) {
+                return;
+              }
+              
+              // get attributes of node
+              var text = node.text;
+              var parent = getNode(nodes, node.parent);
+              if (parent) {
+                var parentText = parent.text;
+              }
+              var childrenText = getChildren(nodes, key);
+              
+              // add attributes to info div
+              var info = document.getElementById("info");
+              if (node.name) {
+                info.childNodes[1].innerHTML = "Name: " + node.name;
+              }
+              
+              info.childNodes[3].innerHTML = "Point: \"" + text + "\"";
+              if (node.details) {
+                info.childNodes[5].innerHTML = "Details: " + node.details;
+              } else {
+                  info.childNodes[5].innerHTML = "Details: None";
+              }
+              if (parent) {
+                info.childNodes[7].innerHTML = "In Topic: \"" + parentText + "\"";
+              }
+              if (childrenText.length > 0) {
+                info.childNodes[9].innerHTML = "<p>Children: </p>" + childrenText;
+              } else {
+                info.childNodes[9].innerHTML = "";
+              }
+              
+            });
+            
+            window.myDiagram.isReadOnly = true;
+        }
+      </script>
+        <script src="js/go.js"></script>
+      <script src="js/mindmap.js"></script>
+   </body>
+</html>

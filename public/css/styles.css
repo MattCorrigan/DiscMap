@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+    outline-width:0;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body, html {
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+canvas {
+    z-index: 0 !important;
+    border: 0 !important;
+}
+
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: none;
+}
+
+.popup {
+    background-color: #efefef;
+    border-radius: 3px;
+    padding: 35px;
+    border: 1px solid #ccc;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 200;
+    text-align: center;
+    max-width: 90vw;
+}
+
+.popup input {
+    border-radius: 3px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.popup #details {
+    margin-top: 8px;
+}
+
+.popup a {
+    text-decoration: none;
+    border-radius: 3px;
+    background-color: #111;
+    color: #efefef;
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    border: 2px solid #111;
+}
+
+.popup a.ghost {
+    background-color: rgba(0,0,0,0);
+    color: #111;
+}
+
+.info {
+    background-color: #efefef;
+    position: fixed;
+    z-index: 200;
+    right: -33vw;
+    top: 0;
+    height: 100vh;
+    width: 33vw;
+    padding: 20px;
+    box-shadow: -2px 0 2px #ccc;
+    transition: 0.2s;
+}
+
+.info .fa-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 75px;
+    background-color: #b61924;
+    color: #fefefe;
+    padding: 0 15px;
+    z-index: 100;
+}
+
+.navbar p {
+    position: fixed;
+    left: 15px;
+    top: 0;
+    line-height: 75px;
+    margin: 0;
+}
+
+.navbar h3 {
+    line-height: 75px;
+    vertical-align: middle;
+    font-size: 1.25rem;
+    margin: 0;
+    z-index: 200;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navbar h3 img {
+    height:50px;
+    margin: 12.5px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fefefe;
+}
+
+.navbar .fa-bars {
+    color: #fefefe;
+    position: fixed;
+    top: 0;
+    right: 20px;
+    line-height: 75px;
+    z-index: 200;
+}
+
+.person {
+    z-index: 2000;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 300px;
+}

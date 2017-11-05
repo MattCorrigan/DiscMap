@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <script>
+         // Initialize Firebase
+         var config = {
+           apiKey: "AIzaSyBUqdelyjsQ4rZFWUdn4ZCzYpwXlJhkRQs",
+           authDomain: "discussion-f4214.firebaseapp.com",
+           databaseURL: "https://discussion-f4214.firebaseio.com",
+           projectId: "discussion-f4214",
+           storageBucket: "discussion-f4214.appspot.com",
+           messagingSenderId: "886727363835"
+         };
+         firebase.initializeApp(config);
+    </script>
+    <script src="js/dashboard.js"></script>
+    <script src="https://use.fontawesome.com/d0bc9af035.js"></script>
+    </head>
+    <body onload="getSessions()">
+        
+        <link rel="stylesheet" href="css/dashboard.css">
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        
+        <div class="navbar">
+            <a href="./index.html"><h3><img src="discmap.png"></h3></a>
+            <input type="button" onclick="makeNew()" value="+ Create New">
+        </div>
+        
+        <div id="particles-js" class="main">
+            
+
+            
+            <div id="popup" class="popup-container">
+                <div class="popup">
+                  <h2>Create New Discussion</h2>
+                  <input id="title" type="text" placeholder="Discussion Title" autocomplete="off" name="hidden" type="text" spellcheck="false">
+                  <input id="initial" type="text" placeholder="Initial Topic" autocomplete="off" name="hidden" type="text" spellcheck="false">
+                  <a href="#" onclick="generateCode()">Create</a>
+                  <i class="fa fa-close" onclick="closeNew()"></i>
+                </div>
+            </div>
+            
+            
+            <script>
+                function makeNew() {
+                    document.getElementById("popup").style.display = "block";
+                }
+                
+                function closeNew() {
+                    document.getElementById("popup").style.display = "none";
+                }
+            </script>
+            
+        </div>
+        
+        <script>
+          particlesJS.load('particles-js', 'particles.json', function() {
+            console.log('callback - particles.js config loaded');
+          });
+        </script>
+        
+    </body>
+</html>
