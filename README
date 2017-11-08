@@ -1,21 +1,21 @@
 Stage 1:
 
-Students can add DONE
 Students can change their boxes
 Mind Map updates when new box is added
-Mind Map updates when text is changed (https://gojs.net/latest/api/symbols/TextEditingTool.html)
-  								(https://gojs.net/latest/samples/updateDemo.html)
-  								(https://gojs.net/latest/intro/transactions.html)
+Mind Map updates when text is changed 
+(https://gojs.net/latest/api/symbols/TextEditingTool.html)
+(https://gojs.net/latest/samples/updateDemo.html)
+(https://gojs.net/latest/intro/transactions.html)
+
 Stage 2:
 
-If Creator, then their letters are bolded
 Fix check to see if you have internet connection
-Teachers can create rooms DONE
-Students can join rooms DONE
 Incorporate multiple mind map
+
 Stage 3:
 
 Implement Accounts DONE
+
 Features:
 
 See how long a student has been waiting to speak
