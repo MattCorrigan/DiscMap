@@ -76,16 +76,18 @@ function joinSession() {
     if(isConnected){
         var code = parseInt(document.getElementById("code").value);
         var UserName = document.getElementById("name").value;
-        databaseRef.child("codes").orderByChild("code").equalTo(code).once("value",snapshot => {
-            const userData = snapshot.val();
-            if (userData){
-                var data = userData[Object.keys(userData)[0]];
-                var uid = data.uid;
-                var suid = data.sessionUid;
-                var code = data.code;
-                loadMindMaps(uid,suid,UserName,code)
-            }
-        });
+        if(code == "" || UserName == "") {
+          databaseRef.child("codes").orderByChild("code").equalTo(code).once("value",snapshot => {
+              const userData = snapshot.val();
+              if (userData){
+                  var data = userData[Object.keys(userData)[0]];
+                  var uid = data.uid;
+                  var suid = data.sessionUid;
+                  var code = data.code;
+                  loadMindMaps(uid,suid,UserName,code)
+              }
+          });
+        }
     }else{
         console.log("Not Connected to the Internet");
     }
