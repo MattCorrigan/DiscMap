@@ -69,7 +69,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         console.log("logged in")
     } else {
         console.log("wow");
-    }firebase.auth().currentUser.displayName.split(" ")[0]
+    }
 });
 
 function joinSession() {
