@@ -68,7 +68,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     if (user) { //Broken
         console.log("logged in")
     } else {
-        console.log("wow");
+        console.log("logged out");
     }
 });
 
