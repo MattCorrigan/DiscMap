@@ -82,7 +82,7 @@ function generateCode() {
 function getSessions(){
     var node = document.getElementById("particles-js")
     database.ref("/users/" + firebase.auth().currentUser.uid + "/session/").once('value', function(snapshot){
-        if(snapshot.val() == null){
+        if(snapshot.val() != null){
             var val = snapshot.val();
             var main = document.getElementById("particles-js");
             var props = Object.keys(val);
