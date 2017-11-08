@@ -76,7 +76,7 @@ function joinSession() {
     if(isConnected){
         var code = parseInt(document.getElementById("code").value);
         var UserName = document.getElementById("name").value;
-        if(code == "" || UserName == "") {
+        if(code != "" || UserName != "") {
           databaseRef.child("codes").orderByChild("code").equalTo(code).once("value",snapshot => {
               const userData = snapshot.val();
               if (userData){
