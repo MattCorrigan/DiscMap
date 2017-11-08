@@ -82,19 +82,20 @@ function generateCode() {
 function getSessions(){
     var node = document.getElementById("particles-js")
     database.ref("/users/" + firebase.auth().currentUser.uid + "/session/").once('value', function(snapshot){
-        console.log(snapshot.val())
-        var val = snapshot.val();
-        console.log(val);
-        var main = document.getElementById("particles-js");
-        var props = Object.keys(val);
-        console.log(props);
-        for (var i = 0; i < props.length; i++) {
-            var uid = val[props[i]].uid
-            var key = Object.keys(snapshot.val())
-            var name = firebase.auth().currentUser.displayName.split(" ")[0]
-            var code = val[props[i]].code
-            var title = val[props[i]].name;
-            main.innerHTML = '<div class="disc"><h3 onclick="loadMindMaps(\'' + uid + "\',\'" + key[i]+ "\',\'" + name + "\',\'" + code + "\',\'" + title + '\')">' + title + '</h3><i class="fa fa-trash fa-2x"></i></div>' + main.innerHTML;
+        if(snapshot.val() == null){
+            var val = snapshot.val();
+            var main = document.getElementById("particles-js");
+            var props = Object.keys(val);
+            for (var i = 0; i < props.length; i++) {
+                var uid = val[props[i]].uid
+                var key = Object.keys(snapshot.val())
+                var name = firebase.auth().currentUser.displayName.split(" ")[0]
+                var code = val[props[i]].code
+                var title = val[props[i]].name;
+                main.innerHTML = '<div class="disc"><h3 onclick="loadMindMaps(\'' + uid + "\',\'" + key[i]+ "\',\'" + name + "\',\'" + code + "\',\'" + title + '\')">' + title + '</h3><i class="fa fa-trash fa-2x"></i></div>' + main.innerHTML;
+            }
+        }else{
+            console.log("No Existing Mindmaps")
         }
     });
 }
