@@ -65,7 +65,7 @@ function openDashboard() {
 }
 
 firebase.auth().onAuthStateChanged(function (user) {
-    if (user) { //Broken
+    if (user) {
         console.log("logged in")
     } else {
         console.log("logged out");
