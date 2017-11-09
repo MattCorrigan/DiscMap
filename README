@@ -2,11 +2,7 @@ Stage 1:
 
 Students can change their boxes
 Mind Map updates when new box is added
-Mind Map updates when text is changed 
-(https://gojs.net/latest/api/symbols/TextEditingTool.html)
-(https://gojs.net/latest/samples/updateDemo.html)
-(https://gojs.net/latest/intro/transactions.html)
-
+Mind Map updates when text is changed
 Stage 2:
 
 Fix check to see if you have internet connection
