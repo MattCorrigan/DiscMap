@@ -1,0 +1,94 @@
+<html>
+<head>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="mynetwork"></div>
+
+<script type="text/javascript">
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+        {id: 1, label: 'Node 1'},
+        {id: 2, label: 'Node 2'},
+        {id: 3, label: 'Node 3'},
+        {id: 4, label: 'Node 4'},
+        {id: 5, label: 'Node 5'}
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+        {from: 1, to: 3},
+        {from: 1, to: 2},
+        {from: 2, to: 4},
+        {from: 2, to: 5}
+    ]);
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+
+    // provide the data in the vis format
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {};
+
+    // initialize your network!
+    var network = new vis.Network(container, data, options);
+
+    var locales = {
+      en: {
+        edit: 'Edit',
+        del: 'Delete selected',
+        back: 'Back',
+        addNode: 'Add Node',
+        addEdge: 'Add Edge',
+        editNode: 'Edit Node',
+        editEdge: 'Edit Edge',
+        addDescription: 'Click in an empty space to place a new node.',
+        edgeDescription: 'Click on a node and drag the edge to another node to connect them.',
+        editEdgeDescription: 'Click on the control points and drag them to a node to connect to it.',
+        createEdgeError: 'Cannot link edges to a cluster.',
+        deleteClusterError: 'Clusters cannot be deleted.',
+        editClusterError: 'Clusters cannot be edited.'
+      }
+    }
+
+    var options = {
+      autoResize: true,
+      locale: 'en',
+      height: '100%',
+      width: '100%',
+      clickToUse: true,
+      locales: locales,
+      manipulation: {
+        addNode: function (data, callback) {
+
+        }
+      },
+      configure: {
+
+      }
+      // configure: {...},    // defined in the configure module.
+      // edges: {...},        // defined in the edges module.
+      // nodes: {...},        // defined in the nodes module.
+      // groups: {...},       // defined in the groups module.
+      // layout: {...},       // defined in the layout module.
+      // interaction: {...},  // defined in the interaction module.
+      // manipulation: {...}, // defined in the manipulation module.
+      // physics: {...},      // defined in the physics module.
+    }
+
+    network.setOptions(options);
+
+    network.on("click", function (params) {
+        params.event = "[original event]";
+        document.getElementById('eventSpan').innerHTML = '<h2>Click event:</h2>' + JSON.stringify(params, null, 4);
+        console.log('click event, getNodeAt returns: ' + this.getNodeAt(params.pointer.DOM));
+    });
+    //https://github.com/almende/vis/blob/master/examples/network/events/interactionEvents.html
+</script>
+<div id="eventSpan"></div>
+</body>
+</html>
