@@ -71,6 +71,18 @@
         },
         "smooth": false
       },
+      "physics": {
+          "barnesHut": {
+            "gravitationalConstant": -30000,
+            "centralGravity": 1.7,
+            "springConstant": 0.6,
+            "damping": 0.48,
+            "avoidOverlap": 1
+          },
+          "maxVelocity": 13,
+          "minVelocity": 0.75,
+          "timestep": 0.27
+      },
       nodes: {
         shape: 'box',
         margin: 10,
