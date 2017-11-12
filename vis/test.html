@@ -38,7 +38,6 @@
         nodes: nodes,
         edges: edges
     };
-    var options = {};
 
     // initialize your network!
     var network = new vis.Network(container, data, options);
@@ -72,16 +71,9 @@
         "smooth": false
       },
       "physics": {
-          "barnesHut": {
-            "gravitationalConstant": -30000,
-            "centralGravity": 1.7,
-            "springConstant": 0.6,
-            "damping": 0.48,
-            "avoidOverlap": 1
-          },
-          "maxVelocity": 13,
-          "minVelocity": 0.75,
-          "timestep": 0.27
+        "barnesHut": {
+          "avoidOverlap": 1
+        },
       },
       nodes: {
         shape: 'box',
@@ -89,9 +81,6 @@
         widthConstraint: {
           maximum: 200
         }
-      },
-      physics: {
-        enabled: false
       },
       autoResize: true,
       locale: 'en',
@@ -109,12 +98,10 @@
       // }
       // configure: {...},    // defined in the configure module.
       // edges: {...},        // defined in the edges module.
-      // nodes: {...},        // defined in the nodes module.
       // groups: {...},       // defined in the groups module.
       // layout: {...},       // defined in the layout module.
       // interaction: {...},  // defined in the interaction module.
       // manipulation: {...}, // defined in the manipulation module.
-      // physics: {...},      // defined in the physics module.
     }
 
     network.setOptions(options);
@@ -131,10 +118,5 @@
     //https://github.com/almende/vis/blob/master/examples/network/events/interactionEvents.html
 </script>
 <div id="eventSpan"></div>
-<ul class='custom-menu'>
-  <li data-action = "first">First thing</li>
-  <li data-action = "second">Second thing</li>
-  <li data-action = "third">Third thing</li>
-</ul>
 </body>
 </html>
