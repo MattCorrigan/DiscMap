@@ -221,7 +221,6 @@
 
                 exportArea.value = exportValue;
 
-                resizeExportArea();
             }
             function importNetwork() {
                 var inputValue = exportArea.value;
@@ -269,8 +268,6 @@
                   }
                 };
                 network = new vis.Network(container, data, options);
-
-                resizeExportArea();
             }
 
             function getNodeData(data) {
@@ -325,10 +322,6 @@
                   obj[key].id = key;
                   return obj[key];
                 });
-            }
-
-            function resizeExportArea() {
-                exportArea.style.height = (1 + exportArea.scrollHeight) + "px";
             }
 
             function clearPopUp() {
