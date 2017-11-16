@@ -7,66 +7,65 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.css" rel="stylesheet" type="text/css" />
   <style>
-    .popup-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 100;
-        display: none;
-    }
+  .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
 
-    .popup {
-        background-color: #efefef;
-        border-radius: 3px;
-        padding: 35px;
-        border: 1px solid #ccc;
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        z-index: 200;
-        text-align: center;
-        max-width: 90vw;
-    }
+  /* Modal Content */
+  .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+  }
 
-    .popup input {
-        border-radius: 3px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        display: block;
-        margin: 0 auto;
-        width: 100%;
-    }
+  /* The Close Button */
+  .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
 
-    .popup #details {
-        margin-top: 8px;
-    }
-
-    .popup a {
-        text-decoration: none;
-        border-radius: 3px;
-        background-color: #111;
-        color: #efefef;
-        padding: 10px;
-        display: block;
-        margin: 0 auto;
-        margin-top: 10px;
-        border: 2px solid #111;
-    }
-
-    .popup a.ghost {
-        background-color: rgba(0,0,0,0);
-        color: #111;
-    }
+  .close:hover,
+  .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
   </style>
 </head>
 <body>
 <div id="mynetwork"></div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
 
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  </div>
+
+</div>
 <script type="text/javascript">
+
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
     // create an array with nodes
     var nodes = new vis.DataSet([
         {id: 1, label: 'elit. Aenean commodo. Node 1'},
@@ -162,35 +161,26 @@
 
     network.on("click", function (params) {
         params.event = "[original event]";
-        document.getElementById('eventSpan').innerHTML = '<h2>Click event:</h2>' + JSON.stringify(params, null, 4);
         console.log('click event, getNodeAt returns: ' + this.getNodeAt(params.pointer.DOM));
-        if(this.getNodeAt(params.pointer.DOM) != "undefined")
+        if(this.getNodeAt(params.pointer.DOM) != undefined)
         {
           console.log(params.pointer)
-          var showPopup = function() {
-           var popup = document.getElementById("popup");
-           popup.style.display = "block";
-          }
-         
-         var removePopup = function() {
-           var popup = document.getElementById("popup");
-           popup.style.display = "none";
-           //document.getElementById("input").value = "";
-           //document.getElementById("details").value = "";
-         }
+          modal.style.display = "block";
         }
     });
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
     //https://github.com/almende/vis/blob/master/examples/network/events/interactionEvents.html
+
 </script>
-<div id="eventSpan"></div>
-<div id="popup" class="popup-container" onclick="removePopup()">
-  <div class="popup">
-    <h2>Enter Topic Name:</h2>
-    <input id="input" type="text" placeholder="Topic Name" autocomplete="off" name="hidden" type="text" spellcheck="false">
-    <input id="details" type="text" placeholder="More details..." autocomplete="off" name="hidden" type="text" spellcheck="false">
-    <a href="#" onclick="add()">Add</a>
-    <a class="ghost" href="#" onclick="removePopup()">Cancel</a>
-  </div>
-</div>
+
 </body>
 </html>
